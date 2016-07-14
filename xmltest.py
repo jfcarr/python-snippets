@@ -1,10 +1,16 @@
-from xml.dom.minidom import parse,parseString
+import xml.etree.ElementTree as ET
 
-dom = parse('xmltest.xml')
-names=dom.getElementsByTagName('name')
+tree = ET.parse('xmltest.xml')
+root = tree.getroot()
 
-for name in names:
-	firstName = name.getElementsByTagName("first")[0].firstChild.data
-	lastName = name.getElementsByTagName("last")[0].firstChild.data
-	
-	print 'Full name is ' + firstName + ' ' + lastName
+firstName = ''
+lastName = ''
+
+for names in root.iter('names'):
+	for name in names:
+		for details in name:
+			if details.tag == 'first':
+				firstName = details.text
+			if details.tag == 'last':
+				lastName = details.text
+		print 'Full name is ' + firstName + ' ' + lastName
