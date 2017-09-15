@@ -3,4 +3,4 @@
 import sys
 
 for line in sys.stdin:
-	sys.stdout.write("1>: " + line)
+	sys.stdout.write("2>: " + line)
